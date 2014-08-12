@@ -29,7 +29,7 @@ an optional number that defines the length of the \code{period}.
 an optional factor or list of factors, each of the same length as x. Use to identify several different ellipses to fit at once, in which case \code{fel} returns an object of class \code{ellipsefitlist} instead of \code{ellipsefit}. If \code{subjects} is a list of factors each combination of the factors must be present in the data or an error will be produced.
 }
   \item{times}{
-either a numeric vector of length \code{nrow(x)} or one of the two options "equal" or the default "unknown". If the times at which ellipse observations are taken are known, a numeric vector
+either a numeric vector of length \code{nrow(x)} or one of the two options: "equal" or the default "unknown". If the times at which ellipse observations are taken are known, a numeric vector
 can be used to give those times. If not, predicted values are found by minimizing geometric distances from the fitted ellipse to the observations. If "equal", time points are assumed to be equally spaced in a counterclockwise fashion. Do not use the "harmonic2" method unless times are either known or are known to be equal. Bootstrapping results are also more accurate if correct times are used.}
   \item{subset}{
 an optional vector specifying a subset of observations to be used in the fitting process.
@@ -45,7 +45,10 @@ is \code{\link{na.omit}}. Value \code{\link{na.exclude}} can be useful.
 logical, if \code{TRUE} results will be bootstrapped by \code{\link{summary.ellipsefit}}.
 }
   \item{...}{
-other optional arguments passed to \code{\link{summary.ellipsefit}} if \code{boot=TRUE}.
+other optional arguments such as \code{seed}, N=number of realizations, \code{cbb} for circular block bootstrapping, 
+are passed to \code{\link{summary.fittedloop}} if \code{boot=TRUE}. 
+ } 
+
 }
 }
 \details{
@@ -54,7 +57,7 @@ x and y.
 
 The values of parameters such as area, lag, retention, coercion, split angle and hysteresis.y are estimated from this ellipse. See \code{\link{loop.parameters}}.
 
-The harmonic2 method is a two step harmonic least squares model using generalized transcendental equations presented by Lapshin (1995).  Yang and Parkhurst provide the efficient estimates 
+The harmonic2 method is a two-step harmonic least squares model using generalized transcendental equations presented by Lapshin (1995).  Yang and Parkhurst provide the efficient estimates 
 for parameters and as such "harmonic2" is used as the default. Direct specific least squares (\code{method="direct"}) based on the work of Radim Halir and Jan Flusser is also available although work on delta method standard errors is still in progress. The geometric method is based on the work of Gander, Golub and Strebel and uses the results of an initial direct method to produce an ellipse that minimizes the sum of the squared geometric distances. Finally \code{method="lm"} and 
 ellipse specific non-linear least squares (\code{method="nls"}) are included as well.
 
@@ -80,7 +83,7 @@ Although degree of freedom adjustments are made for other methods, measures of f
     \item{Std.Errors}{Delta standard errors produced by the delta method.}
   \item{residuals}{algebraic residuals from the model. The function \code{\link{residuals.ellipsefit}} can produce other types of residuals from an \code{ellipsefit} object.}
 
-if \code{boot==TRUE} \code{\link{fel}} returns an object of class \code{ellipsesummary} by making a call to \code{\link{summary.ellipsefit}}. See \code{\link{summary.ellipsefit}}.
+if \code{boot=TRUE} \code{\link{fel}} returns an object of class \code{ellipsesummary} by making a call to \code{\link{summary.ellipsefit}}. See \code{\link{summary.ellipsefit}}.
 
 For bootstrapping
     \item{Boot.Estimates}{bootstrapped estimates.}
